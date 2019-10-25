@@ -10,7 +10,8 @@ public class MySQLTableCreation {
 			try {
 				// Step 1 Connect to MySQL.
 				System.out.println("Connecting to " + MySQLDBUtil.URL);
-				//loading driver
+				//loading driver. Creating com.mysql.cj.jdbc.Driver objects
+				//essentially, (new com.mysql.cj.jdbc.Driver)
 				Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
 				Connection conn = DriverManager.getConnection(MySQLDBUtil.URL);
 				
@@ -18,6 +19,8 @@ public class MySQLTableCreation {
 					return;
 				}
 				//Step 2 Drop tables in case they exist.
+				//the order of table to drop matters. Drop the one with with foreign key table
+				//first, then the ones without foreign key. Basically, drop the dependencies first.
 				Statement statement = conn.createStatement();
 				String sql = "DROP TABLE IF EXISTS categories";
 				statement.executeUpdate(sql);

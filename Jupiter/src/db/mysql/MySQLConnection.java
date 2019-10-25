@@ -48,6 +48,8 @@ public class MySQLConnection implements DBConnection {
 			return;
 		}
 		try {
+			//preparedStatements helps us to prevent some bad people hacking db by inserting 
+			//malicious code.
 			String sql = "INSERT IGNORE INTO history(user_id, item_id) VALUES (?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, userId);

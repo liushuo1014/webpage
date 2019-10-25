@@ -98,6 +98,7 @@
   }
 
   function showElement(element, style) {
+	  //if style is not defined, then make it block
     var displayStyle = style ? style : 'block';
     element.style.display = displayStyle;
   }
@@ -488,6 +489,10 @@
           li.dataset.favorite = favorite;
           favIcon.className = favorite ? 'fa fa-heart' : 'fa fa-heart-o';
         }
+        
+      },function(){
+    	  console.log("error");
+    	  
       });
   }
 
